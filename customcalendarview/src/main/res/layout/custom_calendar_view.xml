@@ -41,21 +41,29 @@
 
     <include layout="@layout/texts_days" />
 
-    <include layout="@layout/texts_number_days_linha1" />
+    <include
+        android:id="@+id/lay_number_days_1"
+        layout="@layout/texts_number_days_linha" />
 
-    <include layout="@layout/texts_number_days_linha1" />
+    <include
+        android:id="@+id/lay_number_days_2"
+        layout="@layout/texts_number_days_linha" />
 
-    <include layout="@layout/texts_number_days_linha1" />
+    <include
+        android:id="@+id/lay_number_days_3"
+        layout="@layout/texts_number_days_linha" />
 
-    <include layout="@layout/texts_number_days_linha1" />
+    <include
+        android:id="@+id/lay_number_days_4"
+        layout="@layout/texts_number_days_linha" />
+
+    <include
+        android:id="@+id/lay_number_days_5"
+        layout="@layout/texts_number_days_linha" />
 
     <include
         android:id="@+id/lay_number_days_6"
-        layout="@layout/texts_number_days_linha1" />
-
-    <include
-        android:id="@+id/lay_number_days_7"
-        layout="@layout/texts_number_days_linha1" />
+        layout="@layout/texts_number_days_linha" />
 
     <View
         android:layout_width="match_parent"

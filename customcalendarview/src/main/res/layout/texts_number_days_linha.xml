@@ -142,7 +142,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="29"
             android:textColor="@color/preto" />
 
         <TextView
@@ -152,7 +151,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="2"
             android:textColor="@color/preto" />
 
         <TextView
@@ -162,7 +160,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="3"
             android:textColor="@color/preto" />
 
         <TextView
@@ -172,7 +169,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="4"
             android:textColor="@color/preto" />
 
         <TextView
@@ -182,7 +178,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="5"
             android:textColor="@color/preto" />
 
         <TextView
@@ -192,7 +187,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="6"
             android:textColor="@color/preto" />
 
         <TextView
@@ -202,7 +196,6 @@
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="7"
             android:textColor="@color/preto" />
     </LinearLayout>
 
