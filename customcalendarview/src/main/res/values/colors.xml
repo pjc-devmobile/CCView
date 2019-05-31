@@ -9,4 +9,8 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="branco">#ffff</color>
     <color name="branco_transparente">#B1ECF0F1</color>
+    <color name="cinza">#AAA9A9</color>
+    <color name="cinzaClaro">#C5C5C5</color>
+    <color name="cinzaEscuro">#555555</color>
+    <color name="preto">#000</color>
 </resources>

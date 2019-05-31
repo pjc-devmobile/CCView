@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_branco"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp">
+
+        <ImageButton
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/view_click"
+            android:src="@drawable/ic_action_left" />
+
+        <TextView
+            android:id="@+id/txt_current_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Maio 2020"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/branco" />
+
+        <ImageButton
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/view_click"
+            android:src="@drawable/ic_action_right" />
+    </FrameLayout>
+
+    <include layout="@layout/texts_days" />
+
+    <include layout="@layout/texts_number_days_linha1" />
+
+    <include layout="@layout/texts_number_days_linha1" />
+
+    <include layout="@layout/texts_number_days_linha1" />
+
+    <include layout="@layout/texts_number_days_linha1" />
+
+    <include
+        android:id="@+id/lay_number_days_6"
+        layout="@layout/texts_number_days_linha1" />
+
+    <include
+        android:id="@+id/lay_number_days_7"
+        layout="@layout/texts_number_days_linha1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cinzaClaro" />
+
+    <TextView
+        android:id="@+id/txt_selected_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="30 de maio 2020"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/cinzaEscuro"
+        android:textStyle="bold" />
+
+</LinearLayout>
