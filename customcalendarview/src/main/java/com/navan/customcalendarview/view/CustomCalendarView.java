@@ -12,17 +12,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.navan.customcalendarview.R;
+import com.navan.customcalendarview.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CustomCalendarView extends LinearLayout {
 
     private ViewHolder vh;
-    private Date currentDate;
-    private Date minDate, maxDate;
+    private Date currentDate, dateSelected;
+    private Date minDate = null, maxDate = null;
     private Calendar currentCalendar;
     private int lastDayMonthInsertInText;
+
+    private List<Date> datesDisables = null;
+    private List<Date> datesEnables = null;
+    private List<Integer> daysWeekDisbales = null;
 
     public CustomCalendarView(Context context) {
         super(context);
@@ -57,6 +64,43 @@ public class CustomCalendarView extends LinearLayout {
         showCurrentDate();
     }
 
+    public void setDateSelected(Date dateSelected) {
+        this.dateSelected = dateSelected;
+        showCurrentDate();
+    }
+
+    public void setMaxDate(Date maxDate) {
+        this.maxDate = maxDate;
+        disableDatesFuture();
+    }
+
+    public void setMinDate(Date minDate) {
+        this.minDate = minDate;
+        disableDatesPast();
+    }
+
+    //AINDA NÃO FUNCIONA
+    private void setDatesDisables(List<Date> datesDisables) {
+        this.datesDisables = datesDisables;
+        showCurrentDate();
+    }
+
+    //AINDA NÃO FUNCIONA
+    private void setDatesEnables(List<Date> datesEnables) {
+        this.datesEnables = datesEnables;
+        showCurrentDate();
+    }
+
+    /**
+     * @param daysWeekDisbales 1 = domingo
+     *                         2 = segunda
+     *                         ...
+     */
+    public void setDaysWeekDisbales(List<Integer> daysWeekDisbales) {
+        this.daysWeekDisbales = daysWeekDisbales;
+        showCurrentDate();
+    }
+
     private void showCurrentDate() {
         currentCalendar = Calendar.getInstance();
         currentCalendar.setTime(currentDate);
@@ -72,13 +116,210 @@ public class CustomCalendarView extends LinearLayout {
         vh.line4.putFourthLine();
         vh.line5.putFifthLine();
         vh.line6.putSexthdLine();
+
+        vh.txtCurrentDate.setText(DateUtils.formatDateExtensoMesAno(currentDate));
+
+        if (dateSelected == null)
+            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(currentDate));
+        else
+            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected));
+
+        disableDaysWeek();
     }
 
+    private void disableDaysWeek() {
+        //disables days week
+        if (daysWeekDisbales != null) {
+            if (daysWeekDisbales.contains(new Integer(1))) {
+                vh.line1.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtDom.setEnabled(false);
+
+                vh.line2.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtDom.setEnabled(false);
+
+                vh.line3.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtDom.setEnabled(false);
+
+                vh.line4.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtDom.setEnabled(false);
+
+                vh.line5.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtDom.setEnabled(false);
+
+                vh.line6.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtDom.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(2))) {
+                vh.line1.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSeg.setEnabled(false);
+
+                vh.line2.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSeg.setEnabled(false);
+
+                vh.line3.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSeg.setEnabled(false);
+
+                vh.line4.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSeg.setEnabled(false);
+
+                vh.line5.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSeg.setEnabled(false);
+
+                vh.line6.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSeg.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(3))) {
+                vh.line1.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtTer.setEnabled(false);
+
+                vh.line2.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtTer.setEnabled(false);
+
+                vh.line3.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtTer.setEnabled(false);
+
+                vh.line4.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtTer.setEnabled(false);
+
+                vh.line5.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtTer.setEnabled(false);
+
+                vh.line6.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtTer.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(4))) {
+                vh.line1.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtQua.setEnabled(false);
+
+                vh.line2.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtQua.setEnabled(false);
+
+                vh.line3.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtQua.setEnabled(false);
+
+                vh.line4.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtQua.setEnabled(false);
+
+                vh.line5.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtQua.setEnabled(false);
+
+                vh.line6.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtQua.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(5))) {
+                vh.line1.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtQui.setEnabled(false);
+
+                vh.line2.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtQui.setEnabled(false);
+
+                vh.line3.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtQui.setEnabled(false);
+
+                vh.line4.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtQui.setEnabled(false);
+
+                vh.line5.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtQui.setEnabled(false);
+
+                vh.line6.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtQui.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(6))) {
+                vh.line1.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSex.setEnabled(false);
+
+                vh.line2.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSex.setEnabled(false);
+
+                vh.line3.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSex.setEnabled(false);
+
+                vh.line4.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSex.setEnabled(false);
+
+                vh.line5.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSex.setEnabled(false);
+
+                vh.line6.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSex.setEnabled(false);
+            }
+
+            if (daysWeekDisbales.contains(new Integer(7))) {
+                vh.line1.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSab.setEnabled(false);
+
+                vh.line2.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSab.setEnabled(false);
+
+                vh.line3.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSab.setEnabled(false);
+
+                vh.line4.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSab.setEnabled(false);
+
+                vh.line5.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSab.setEnabled(false);
+
+                vh.line6.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSab.setEnabled(false);
+            }
+        }
+    }
+
+    private void disableDatesPast() {
+        for (TextView tv : vh.textViews) {
+            if (!tv.getText().toString().isEmpty()) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
+
+                Calendar calendarMinDate = Calendar.getInstance();
+                calendarMinDate.setTime(minDate);
+
+                if (calendar.before(calendarMinDate)) {
+                    tv.setTextColor(getResources().getColor(R.color.cinza));
+                    tv.setEnabled(false);
+                }
+            }
+        }
+    }
+
+    private void disableDatesFuture() {
+        for (TextView tv : vh.textViews) {
+            if (!tv.getText().toString().isEmpty()) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
+
+                Calendar calendarMaxDate = Calendar.getInstance();
+                calendarMaxDate.setTime(maxDate);
+
+                if (calendar.after(calendarMaxDate)) {
+                    tv.setTextColor(getResources().getColor(R.color.cinza));
+                    tv.setEnabled(false);
+                }
+            }
+        }
+    }
+
+    //Classe das rederencias de views e OnClicks
     public class ViewHolder {
 
         private final ImageButton btnLeft, btnRight;
         private final TextView txtCurrentDate, txtDateSelected;
         private final LineNumbersDays line1, line2, line3, line4, line5, line6;
+
+        private ClickNumberDay clickNumberDay = new ClickNumberDay();
+        private ClickLeftRight clickLeftRight = new ClickLeftRight();
+
+        private List<TextView> textViews = new ArrayList<>();
+        private List<View> views = new ArrayList<>();
 
         public ViewHolder() {
             btnLeft = findViewById(R.id.btn_left);
@@ -87,24 +328,121 @@ public class CustomCalendarView extends LinearLayout {
             txtCurrentDate = findViewById(R.id.txt_current_date);
             txtDateSelected = findViewById(R.id.txt_selected_date);
 
-            line1 = new LineNumbersDays(findViewById(R.id.lay_number_days_1));
-            line2 = new LineNumbersDays(findViewById(R.id.lay_number_days_2));
-            line3 = new LineNumbersDays(findViewById(R.id.lay_number_days_3));
-            line4 = new LineNumbersDays(findViewById(R.id.lay_number_days_4));
-            line5 = new LineNumbersDays(findViewById(R.id.lay_number_days_5));
-            line6 = new LineNumbersDays(findViewById(R.id.lay_number_days_6));
+            line1 = new LineNumbersDays(findViewById(R.id.lay_number_days_1), clickNumberDay);
+            line2 = new LineNumbersDays(findViewById(R.id.lay_number_days_2), clickNumberDay);
+            line3 = new LineNumbersDays(findViewById(R.id.lay_number_days_3), clickNumberDay);
+            line4 = new LineNumbersDays(findViewById(R.id.lay_number_days_4), clickNumberDay);
+            line5 = new LineNumbersDays(findViewById(R.id.lay_number_days_5), clickNumberDay);
+            line6 = new LineNumbersDays(findViewById(R.id.lay_number_days_6), clickNumberDay);
+
+            btnRight.setOnClickListener(clickLeftRight);
+            btnLeft.setOnClickListener(clickLeftRight);
+
+            views.addAll(line1.getViews());
+            views.addAll(line2.getViews());
+            views.addAll(line3.getViews());
+            views.addAll(line4.getViews());
+            views.addAll(line5.getViews());
+            views.addAll(line6.getViews());
+
+            textViews.addAll(line1.getTextViews());
+            textViews.addAll(line2.getTextViews());
+            textViews.addAll(line3.getTextViews());
+            textViews.addAll(line4.getTextViews());
+            textViews.addAll(line5.getTextViews());
+            textViews.addAll(line6.getTextViews());
         }
 
+        private class ClickLeftRight implements View.OnClickListener {
+
+            @Override
+            public void onClick(View v) {
+                Calendar cMin = Calendar.getInstance();
+                if (minDate != null)
+                    cMin.setTime(minDate);
+
+                Calendar cMax = Calendar.getInstance();
+                if (maxDate != null)
+                    cMax.setTime(maxDate);
+
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+
+                if (v.getId() == R.id.btn_right) {
+                    c.set(Calendar.MONTH, currentCalendar.get(Calendar.MONTH) + 1);
+                    c.set(Calendar.DAY_OF_MONTH, 1);
+                    if (maxDate != null) {
+                        if (c.before(cMax)) {
+                            setCurrentDate(c.getTime());
+                        }
+                    } else {
+                        setCurrentDate(c.getTime());
+                    }
+
+                } else if (v.getId() == R.id.btn_left) {
+                    c.set(Calendar.MONTH, currentCalendar.get(Calendar.MONTH) - 1);
+                    c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+                    if (minDate != null) {
+                        if (c.after(cMin)) {
+                            setCurrentDate(c.getTime());
+                        }
+                    } else {
+                        setCurrentDate(c.getTime());
+                    }
+                }
+
+                //DATES PAST
+                for (TextView tv : vh.textViews) {
+                    tv.setTextColor(getResources().getColor(R.color.preto));
+                    tv.setEnabled(true);
+                }
+
+                //hide tag in day selected
+                for (int i = 0; i < textViews.size(); i++) {
+                    views.get(i).setVisibility(GONE);
+                    textViews.get(i).setTextColor(getResources().getColor(R.color.preto));
+                }
+
+                disableDatesPast();
+                disableDatesFuture();
+                disableDaysWeek();
+            }
+        }
+
+        private class ClickNumberDay implements View.OnClickListener {
+
+            @Override
+            public void onClick(View v) {
+                if (((TextView) v).getText().toString().isEmpty())
+                    return;
+
+                for (int i = 0; i < textViews.size(); i++) {
+                    if (textViews.get(i).equals(v)) {
+                        views.get(i).setVisibility(VISIBLE);
+                        textViews.get(i).setTextColor(getResources().getColor(R.color.branco));
+                    } else {
+                        views.get(i).setVisibility(GONE);
+                        textViews.get(i).setTextColor(getResources().getColor(R.color.preto));
+                    }
+                }
+
+                currentCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(((TextView) v).getText().toString()));
+                dateSelected = currentCalendar.getTime();
+                vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected));
+
+                disableDaysWeek();
+                disableDatesPast();
+                disableDatesFuture();
+            }
+        }
     }
 
     private class LineNumbersDays {
-        private int lastTextViewInsertId;
-        private boolean isFull = false;
-
         private TextView txtSeg, txtTer, txtQua, txtQui, txtSex, txtSab, txtDom;
         private View viewSeg, viewTer, viewQua, viewQui, viewSex, viewSab, viewDom;
 
-        public LineNumbersDays(View view) {
+        public LineNumbersDays(View view, ViewHolder.ClickNumberDay clickNumberDay) {
             txtSeg = view.findViewById(R.id.txt_seg);
             txtTer = view.findViewById(R.id.txt_ter);
             txtQua = view.findViewById(R.id.txt_qua);
@@ -120,6 +458,14 @@ public class CustomCalendarView extends LinearLayout {
             viewSex = view.findViewById(R.id.view_sex);
             viewSab = view.findViewById(R.id.view_sab);
             viewDom = view.findViewById(R.id.view_dom);
+
+            txtSeg.setOnClickListener(clickNumberDay);
+            txtTer.setOnClickListener(clickNumberDay);
+            txtQua.setOnClickListener(clickNumberDay);
+            txtQui.setOnClickListener(clickNumberDay);
+            txtSex.setOnClickListener(clickNumberDay);
+            txtSab.setOnClickListener(clickNumberDay);
+            txtDom.setOnClickListener(clickNumberDay);
         }
 
         public void putFirstWeek(int firstDayWeek) {
@@ -187,7 +533,6 @@ public class CustomCalendarView extends LinearLayout {
                 txtDom.setText("2");
                 lastDayMonthInsertInText = 2;
             }
-            isFull = true;
         }
 
         public void putSecondLine() {
@@ -331,6 +676,34 @@ public class CustomCalendarView extends LinearLayout {
 
             lastDayMonthInsertInText++;
             txtDom.setText(String.valueOf(lastDayMonthInsertInText));
+        }
+
+        public List<View> getViews() {
+            List<View> views = new ArrayList<>();
+
+            views.add(viewDom);
+            views.add(viewSeg);
+            views.add(viewTer);
+            views.add(viewQua);
+            views.add(viewQui);
+            views.add(viewSex);
+            views.add(viewSab);
+
+            return views;
+        }
+
+        public List<TextView> getTextViews() {
+            List<TextView> textViews = new ArrayList<>();
+
+            textViews.add(txtDom);
+            textViews.add(txtSeg);
+            textViews.add(txtTer);
+            textViews.add(txtQua);
+            textViews.add(txtQui);
+            textViews.add(txtSex);
+            textViews.add(txtSab);
+
+            return textViews;
         }
     }
 }

@@ -9,9 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="12dp">
+        android:background="@color/colorPrimary">
 
         <ImageButton
             android:id="@+id/btn_left"
@@ -19,6 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:background="@drawable/view_click"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
             android:src="@drawable/ic_action_left" />
 
         <TextView
@@ -36,6 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/view_click"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
             android:src="@drawable/ic_action_right" />
     </FrameLayout>
 

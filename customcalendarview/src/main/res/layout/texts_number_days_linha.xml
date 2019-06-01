@@ -139,7 +139,6 @@
             android:id="@+id/txt_seg"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -148,7 +147,6 @@
             android:id="@+id/txt_ter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -157,7 +155,6 @@
             android:id="@+id/txt_qua"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -166,7 +163,6 @@
             android:id="@+id/txt_qui"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -175,7 +171,6 @@
             android:id="@+id/txt_sex"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -184,7 +179,6 @@
             android:id="@+id/txt_sab"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
@@ -193,7 +187,6 @@
             android:id="@+id/txt_dom"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/preto" />
