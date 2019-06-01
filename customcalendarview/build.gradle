@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'maven'
+apply plugin: 'com.android.library'
+
+group = 'com.github.pjc-devmobile' //Subistituir o User pelo seu usuario do github
+
 android {
     compileSdkVersion 28
 

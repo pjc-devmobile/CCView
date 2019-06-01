@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.navan.customcalendarview.utils.DateUtils;
 import com.navan.customcalendarview.view.CustomCalendarView;
@@ -33,5 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         customCalendarView.setMinDate(DateUtils.createDate("31/05/2019"));
         customCalendarView.setMaxDate(DateUtils.createDate("15/06/2019"));
+
+        customCalendarView.setOnDaySelectedListener(new CustomCalendarView.OnDaySelectedListener() {
+            @Override
+            public void onDaySelected(Date date) {
+                Toast.makeText(getApplicationContext(), DateUtils.formatDateExtenso(date), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -31,6 +31,8 @@ public class CustomCalendarView extends LinearLayout {
     private List<Date> datesEnables = null;
     private List<Integer> daysWeekDisbales = null;
 
+    private OnDaySelectedListener onDaySelectedListener;
+
     public CustomCalendarView(Context context) {
         super(context);
         init();
@@ -77,6 +79,10 @@ public class CustomCalendarView extends LinearLayout {
     public void setMinDate(Date minDate) {
         this.minDate = minDate;
         disableDatesPast();
+    }
+
+    public void setOnDaySelectedListener(OnDaySelectedListener onDaySelectedListener) {
+        this.onDaySelectedListener = onDaySelectedListener;
     }
 
     //AINDA NÃO FUNCIONA
@@ -434,6 +440,9 @@ public class CustomCalendarView extends LinearLayout {
                 disableDaysWeek();
                 disableDatesPast();
                 disableDatesFuture();
+
+                if (onDaySelectedListener!=null)
+                    onDaySelectedListener.onDaySelected(dateSelected);
             }
         }
     }
@@ -705,5 +714,9 @@ public class CustomCalendarView extends LinearLayout {
 
             return textViews;
         }
+    }
+
+    public interface OnDaySelectedListener{
+        void onDaySelected(Date date);
     }
 }
