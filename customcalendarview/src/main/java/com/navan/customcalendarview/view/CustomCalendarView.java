@@ -86,13 +86,13 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     //AINDA NÃO FUNCIONA
-    private void setDatesDisables(List<Date> datesDisables) {
+    public void setSpecialDatesDisables(List<Date> datesDisables) {
         this.datesDisables = datesDisables;
         showCurrentDate();
     }
 
     //AINDA NÃO FUNCIONA
-    private void setDatesEnables(List<Date> datesEnables) {
+    public void setSpecialDatesEnables(List<Date> datesEnables) {
         this.datesEnables = datesEnables;
         showCurrentDate();
     }
@@ -279,6 +279,9 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     private void disableDatesPast() {
+        if (minDate == null)
+            return;
+
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
@@ -297,6 +300,9 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     private void disableDatesFuture() {
+        if (maxDate==null)
+            return;
+
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
