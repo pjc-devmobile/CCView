@@ -91,7 +91,6 @@ public class CustomCalendarView extends LinearLayout {
         showCurrentDate();
     }
 
-    //AINDA NÃO FUNCIONA
     public void setSpecialDatesEnables(List<Date> datesEnables) {
         this.datesEnables = datesEnables;
         showCurrentDate();
@@ -131,151 +130,156 @@ public class CustomCalendarView extends LinearLayout {
             vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected));
 
         disableDaysWeek();
+        enableDaysSpecial();
+
+        showPreDateSelected();
     }
 
     private void disableDaysWeek() {
         //disables days week
         if (daysWeekDisbales != null) {
             if (daysWeekDisbales.contains(new Integer(1))) {
-                vh.line1.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtDom.setEnabled(false);
 
-                vh.line2.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtDom.setEnabled(false);
 
-                vh.line3.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtDom.setEnabled(false);
 
-                vh.line4.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtDom.setEnabled(false);
 
-                vh.line5.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtDom.setEnabled(false);
 
-                vh.line6.txtDom.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtDom.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtDom.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(2))) {
-                vh.line1.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtSeg.setEnabled(false);
 
-                vh.line2.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtSeg.setEnabled(false);
 
-                vh.line3.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtSeg.setEnabled(false);
 
-                vh.line4.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtSeg.setEnabled(false);
 
-                vh.line5.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtSeg.setEnabled(false);
 
-                vh.line6.txtSeg.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSeg.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtSeg.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(3))) {
-                vh.line1.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtTer.setEnabled(false);
 
-                vh.line2.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtTer.setEnabled(false);
 
-                vh.line3.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtTer.setEnabled(false);
 
-                vh.line4.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtTer.setEnabled(false);
 
-                vh.line5.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtTer.setEnabled(false);
 
-                vh.line6.txtTer.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtTer.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtTer.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(4))) {
-                vh.line1.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtQua.setEnabled(false);
 
-                vh.line2.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtQua.setEnabled(false);
 
-                vh.line3.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtQua.setEnabled(false);
 
-                vh.line4.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtQua.setEnabled(false);
 
-                vh.line5.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtQua.setEnabled(false);
 
-                vh.line6.txtQua.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtQua.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtQua.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(5))) {
-                vh.line1.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtQui.setEnabled(false);
 
-                vh.line2.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtQui.setEnabled(false);
 
-                vh.line3.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtQui.setEnabled(false);
 
-                vh.line4.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtQui.setEnabled(false);
 
-                vh.line5.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtQui.setEnabled(false);
 
-                vh.line6.txtQui.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtQui.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtQui.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(6))) {
-                vh.line1.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtSex.setEnabled(false);
 
-                vh.line2.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtSex.setEnabled(false);
 
-                vh.line3.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtSex.setEnabled(false);
 
-                vh.line4.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtSex.setEnabled(false);
 
-                vh.line5.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtSex.setEnabled(false);
 
-                vh.line6.txtSex.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSex.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtSex.setEnabled(false);
             }
 
             if (daysWeekDisbales.contains(new Integer(7))) {
-                vh.line1.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line1.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line1.txtSab.setEnabled(false);
 
-                vh.line2.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line2.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line2.txtSab.setEnabled(false);
 
-                vh.line3.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line3.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line3.txtSab.setEnabled(false);
 
-                vh.line4.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line4.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line4.txtSab.setEnabled(false);
 
-                vh.line5.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line5.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line5.txtSab.setEnabled(false);
 
-                vh.line6.txtSab.setTextColor(getResources().getColor(R.color.cinza));
+                vh.line6.txtSab.setTextColor(getResources().getColor(R.color.cinzaClaro));
                 vh.line6.txtSab.setEnabled(false);
             }
         }
+
+        showPreDateSelected();
     }
 
     private void disableDatesPast() {
@@ -292,11 +296,13 @@ public class CustomCalendarView extends LinearLayout {
                 calendarMinDate.setTime(minDate);
 
                 if (calendar.before(calendarMinDate)) {
-                    tv.setTextColor(getResources().getColor(R.color.cinza));
+                    tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
                     tv.setEnabled(false);
                 }
             }
         }
+
+        showPreDateSelected();
     }
 
     private void disableDatesFuture() {
@@ -313,10 +319,62 @@ public class CustomCalendarView extends LinearLayout {
                 calendarMaxDate.setTime(maxDate);
 
                 if (calendar.after(calendarMaxDate)) {
-                    tv.setTextColor(getResources().getColor(R.color.cinza));
+                    tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
                     tv.setEnabled(false);
                 }
             }
+        }
+
+        showPreDateSelected();
+    }
+
+    private void enableDaysSpecial() {
+        if (datesEnables==null || datesEnables.isEmpty())
+            return;
+
+        List<String> datesSpecialEnableString = new ArrayList<>();
+        for (Date d: datesEnables)
+            datesSpecialEnableString.add(DateUtils.formatDate(d));
+
+        int i = 0;
+        for (TextView tv : vh.textViews) {
+            if (!tv.getText().toString().isEmpty()) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
+
+
+                if (datesSpecialEnableString.contains(DateUtils.formatDate(calendar.getTime()))) {
+                    tv.setTextColor(getResources().getColor(R.color.preto));
+                    tv.setEnabled(true);
+                }
+
+                if (dateSelected!=null && dateSelected.equals(calendar.getTime())) {
+                    tv.setTextColor(getResources().getColor(R.color.branco));
+                    vh.views.get(i).setVisibility(VISIBLE);
+                }
+            }
+
+            i++;
+        }
+        showPreDateSelected();
+    }
+
+    private void showPreDateSelected() {
+        int i = 0;
+        for (TextView tv : vh.textViews) {
+            if (!tv.getText().toString().isEmpty()) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
+
+                if (dateSelected!=null && (DateUtils.formatDate(dateSelected).equals(DateUtils.formatDate(calendar.getTime())))) {
+                    tv.setTextColor(getResources().getColor(R.color.branco));
+                    vh.views.get(i).setVisibility(VISIBLE);
+                }
+            }
+
+            i++;
         }
     }
 
@@ -419,6 +477,8 @@ public class CustomCalendarView extends LinearLayout {
                 disableDatesPast();
                 disableDatesFuture();
                 disableDaysWeek();
+
+                enableDaysSpecial();
             }
         }
 
@@ -446,6 +506,7 @@ public class CustomCalendarView extends LinearLayout {
                 disableDaysWeek();
                 disableDatesPast();
                 disableDatesFuture();
+                enableDaysSpecial();
 
                 if (onDaySelectedListener!=null)
                     onDaySelectedListener.onDaySelected(dateSelected);

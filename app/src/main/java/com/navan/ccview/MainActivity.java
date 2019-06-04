@@ -35,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
         customCalendarView.setMinDate(DateUtils.createDate("31/05/2019"));
         customCalendarView.setMaxDate(DateUtils.createDate("15/06/2019"));
 
+        List<Date> enables = new ArrayList<>();
+        enables.add(DateUtils.createDate("28/06/2019"));
+
+        customCalendarView.setSpecialDatesEnables(enables);
+
         customCalendarView.setOnDaySelectedListener(new CustomCalendarView.OnDaySelectedListener() {
             @Override
             public void onDaySelected(Date date) {
                 Toast.makeText(getApplicationContext(), DateUtils.formatDateExtenso(date), Toast.LENGTH_LONG).show();
             }
         });
+
+        customCalendarView.setDateSelected(new Date());
     }
 }
