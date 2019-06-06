@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        customCalendarView.setDateSelected(new Date());
+       // customCalendarView.setDateSelected(new Date());
+        customCalendarView.setDateSelected(DateUtils.createDate("20/06/2019"));
     }
 }
