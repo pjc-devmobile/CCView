@@ -1,16 +1,14 @@
 package com.navan.ccview;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
 import com.navan.customcalendarview.utils.DateUtils;
 import com.navan.customcalendarview.view.CustomCalendarView;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,22 +30,32 @@ public class MainActivity extends AppCompatActivity {
         daysWeek.add(7);
         customCalendarView.setDaysWeekDisbales(daysWeek);
 
-        customCalendarView.setMinDate(DateUtils.createDate("31/05/2019"));
-        customCalendarView.setMaxDate(DateUtils.createDate("15/06/2019"));
+        Calendar cmin = Calendar.getInstance();
+        cmin.setTime(DateUtils.createDate("31/05/2019"));
 
-        List<Date> enables = new ArrayList<>();
-        enables.add(DateUtils.createDate("28/06/2019"));
+        Calendar cmax = Calendar.getInstance();
+        cmax.setTime(DateUtils.createDate("15/06/2019"));
+
+        customCalendarView.setMinDate(cmin);
+        customCalendarView.setMaxDate(cmax);
+
+        List<Calendar> enables = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.createDate("28/06/2019"));
+        enables.add(calendar);
 
         customCalendarView.setSpecialDatesEnables(enables);
 
         customCalendarView.setOnDaySelectedListener(new CustomCalendarView.OnDaySelectedListener() {
             @Override
-            public void onDaySelected(Date date) {
-                Toast.makeText(getApplicationContext(), DateUtils.formatDateExtenso(date), Toast.LENGTH_LONG).show();
+            public void onDaySelected(Calendar date) {
+                Toast.makeText(getApplicationContext(), DateUtils.formatDateExtenso(date.getTime()), Toast.LENGTH_LONG).show();
             }
         });
 
-       // customCalendarView.setDateSelected(new Date());
-        customCalendarView.setDateSelected(DateUtils.createDate("20/06/2019"));
+        // customCalendarView.setDateSelected(new Date());
+        Calendar calendarSeleted = Calendar.getInstance();
+        calendarSeleted.setTime(DateUtils.createDate("20/06/2019"));
+        customCalendarView.setDateSelected(calendar);
     }
 }

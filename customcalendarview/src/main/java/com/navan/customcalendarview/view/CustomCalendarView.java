@@ -16,19 +16,18 @@ import com.navan.customcalendarview.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CustomCalendarView extends LinearLayout {
 
     private ViewHolder vh;
-    private Date currentDate, dateSelected;
-    private Date minDate = null, maxDate = null;
+    private Calendar dateSelected;
+    private Calendar minDate = null, maxDate = null;
     private Calendar currentCalendar;
     private int lastDayMonthInsertInText;
 
-    private List<Date> datesDisables = null;
-    private List<Date> datesEnables = null;
+    private List<Calendar> datesDisables = null;
+    private List<Calendar> datesEnables = null;
     private List<Integer> daysWeekDisbales = null;
 
     private OnDaySelectedListener onDaySelectedListener;
@@ -58,25 +57,25 @@ public class CustomCalendarView extends LinearLayout {
         LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addView(inflate(getContext(), R.layout.custom_calendar_view, null), layoutParams);
         vh = new ViewHolder();
-        setCurrentDate(new Date());
+        setCurrentDate(Calendar.getInstance());
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setCurrentDate(Calendar currentCalendar) {
+        this.currentCalendar = currentCalendar;
         showCurrentDate();
     }
 
-    public void setDateSelected(Date dateSelected) {
+    public void setDateSelected(Calendar dateSelected) {
         this.dateSelected = dateSelected;
         showCurrentDate();
     }
 
-    public void setMaxDate(Date maxDate) {
+    public void setMaxDate(Calendar maxDate) {
         this.maxDate = maxDate;
         disableDatesFuture();
     }
 
-    public void setMinDate(Date minDate) {
+    public void setMinDate(Calendar minDate) {
         this.minDate = minDate;
         disableDatesPast();
     }
@@ -86,12 +85,12 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     //AINDA NÃO FUNCIONA
-    public void setSpecialDatesDisables(List<Date> datesDisables) {
+    public void setSpecialDatesDisables(List<Calendar> datesDisables) {
         this.datesDisables = datesDisables;
         showCurrentDate();
     }
 
-    public void setSpecialDatesEnables(List<Date> datesEnables) {
+    public void setSpecialDatesEnables(List<Calendar> datesEnables) {
         this.datesEnables = datesEnables;
         showCurrentDate();
     }
@@ -107,12 +106,12 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     private void showCurrentDate() {
-        currentCalendar = Calendar.getInstance();
-        currentCalendar.setTime(currentDate);
+        if (currentCalendar == null)
+            currentCalendar = Calendar.getInstance();
 
         //primeira semana
         Calendar c = Calendar.getInstance();
-        c.setTime(currentDate);
+        c.setTime(currentCalendar.getTime());
         c.set(Calendar.DAY_OF_MONTH, 1);
         vh.line1.putFirstWeek(c.get(Calendar.DAY_OF_WEEK));
 
@@ -122,12 +121,12 @@ public class CustomCalendarView extends LinearLayout {
         vh.line5.putFifthLine();
         vh.line6.putSexthdLine();
 
-        vh.txtCurrentDate.setText(DateUtils.formatDateExtensoMesAno(currentDate));
+        vh.txtCurrentDate.setText(DateUtils.formatDateExtensoMesAno(currentCalendar.getTime()));
 
         if (dateSelected == null)
-            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(currentDate));
+            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(currentCalendar.getTime()));
         else
-            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected));
+            vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected.getTime()));
 
         disableDaysWeek();
         enableDaysSpecial();
@@ -289,16 +288,15 @@ public class CustomCalendarView extends LinearLayout {
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
+                calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
 
-                Calendar calendarMinDate = Calendar.getInstance();
-                calendarMinDate.setTime(minDate);
 
-                if (calendar.before(calendarMinDate)) {
-                    tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
-                    tv.setEnabled(false);
-                }
+                if (minDate != null)
+                    if (calendar.before(minDate)) {
+                        tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
+                        tv.setEnabled(false);
+                    }
             }
         }
 
@@ -306,22 +304,20 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     private void disableDatesFuture() {
-        if (maxDate==null)
+        if (maxDate == null)
             return;
 
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
+                calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
 
-                Calendar calendarMaxDate = Calendar.getInstance();
-                calendarMaxDate.setTime(maxDate);
-
-                if (calendar.after(calendarMaxDate)) {
-                    tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
-                    tv.setEnabled(false);
-                }
+                if (maxDate != null)
+                    if (calendar.after(maxDate)) {
+                        tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
+                        tv.setEnabled(false);
+                    }
             }
         }
 
@@ -329,18 +325,18 @@ public class CustomCalendarView extends LinearLayout {
     }
 
     private void enableDaysSpecial() {
-        if (datesEnables==null || datesEnables.isEmpty())
+        if (datesEnables == null || datesEnables.isEmpty())
             return;
 
         List<String> datesSpecialEnableString = new ArrayList<>();
-        for (Date d: datesEnables)
-            datesSpecialEnableString.add(DateUtils.formatDate(d));
+        for (Calendar c : datesEnables)
+            datesSpecialEnableString.add(DateUtils.formatDate(c.getTime()));
 
         int i = 0;
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
+                calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
 
 
@@ -349,7 +345,7 @@ public class CustomCalendarView extends LinearLayout {
                     tv.setEnabled(true);
                 }
 
-                if (dateSelected!=null && dateSelected.equals(calendar.getTime())) {
+                if (dateSelected != null && dateSelected.equals(calendar.getTime())) {
                     tv.setTextColor(getResources().getColor(R.color.branco));
                     vh.views.get(i).setVisibility(VISIBLE);
                 }
@@ -365,10 +361,10 @@ public class CustomCalendarView extends LinearLayout {
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
+                calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
 
-                if (dateSelected!=null && (DateUtils.formatDate(dateSelected).equals(DateUtils.formatDate(calendar.getTime())))) {
+                if (dateSelected != null && (DateUtils.formatDate(dateSelected.getTime()).equals(DateUtils.formatDate(calendar.getTime())))) {
                     tv.setTextColor(getResources().getColor(R.color.branco));
                     vh.views.get(i).setVisibility(VISIBLE);
                 }
@@ -427,26 +423,18 @@ public class CustomCalendarView extends LinearLayout {
 
             @Override
             public void onClick(View v) {
-                Calendar cMin = Calendar.getInstance();
-                if (minDate != null)
-                    cMin.setTime(minDate);
-
-                Calendar cMax = Calendar.getInstance();
-                if (maxDate != null)
-                    cMax.setTime(maxDate);
-
                 Calendar c = Calendar.getInstance();
-                c.setTime(currentDate);
+                c.setTime(currentCalendar.getTime());
 
                 if (v.getId() == R.id.btn_right) {
                     c.set(Calendar.MONTH, currentCalendar.get(Calendar.MONTH) + 1);
                     c.set(Calendar.DAY_OF_MONTH, 1);
                     if (maxDate != null) {
-                        if (c.before(cMax)) {
-                            setCurrentDate(c.getTime());
+                        if (c.before(maxDate)) {
+                            setCurrentDate(c);
                         }
                     } else {
-                        setCurrentDate(c.getTime());
+                        setCurrentDate(c);
                     }
 
                 } else if (v.getId() == R.id.btn_left) {
@@ -454,11 +442,11 @@ public class CustomCalendarView extends LinearLayout {
                     c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
 
                     if (minDate != null) {
-                        if (c.after(cMin)) {
-                            setCurrentDate(c.getTime());
+                        if (c.after(minDate)) {
+                            setCurrentDate(c);
                         }
                     } else {
-                        setCurrentDate(c.getTime());
+                        setCurrentDate(c);
                     }
                 }
 
@@ -500,15 +488,15 @@ public class CustomCalendarView extends LinearLayout {
                 }
 
                 currentCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(((TextView) v).getText().toString()));
-                dateSelected = currentCalendar.getTime();
-                vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected));
+                dateSelected = currentCalendar;
+                vh.txtDateSelected.setText(DateUtils.formatDateExtenso(dateSelected.getTime()));
 
                 disableDaysWeek();
                 disableDatesPast();
                 disableDatesFuture();
                 enableDaysSpecial();
 
-                if (onDaySelectedListener!=null)
+                if (onDaySelectedListener != null)
                     onDaySelectedListener.onDaySelected(dateSelected);
             }
         }
@@ -783,7 +771,7 @@ public class CustomCalendarView extends LinearLayout {
         }
     }
 
-    public interface OnDaySelectedListener{
-        void onDaySelected(Date date);
+    public interface OnDaySelectedListener {
+        void onDaySelected(Calendar dateSelected);
     }
 }
