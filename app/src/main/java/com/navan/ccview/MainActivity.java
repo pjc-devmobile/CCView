@@ -9,6 +9,7 @@ import com.navan.customcalendarview.view.CustomCalendarView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         customCalendarView.setDaysWeekDisbales(daysWeek);
 
         Calendar cmin = Calendar.getInstance();
-        cmin.setTime(DateUtils.createDate("31/05/2019"));
+        //cmin.setTime(new Date(System.currentTimeMillis()));
 
         Calendar cmax = Calendar.getInstance();
         cmax.setTime(DateUtils.createDate("15/06/2019"));
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // customCalendarView.setDateSelected(new Date());
-        Calendar calendarSeleted = Calendar.getInstance();
-        calendarSeleted.setTime(DateUtils.createDate("20/06/2019"));
-        customCalendarView.setDateSelected(calendar);
+       // Calendar calendarSeleted = Calendar.getInstance();
+        //calendarSeleted.setTime(DateUtils.createDate("20/06/2019"));
+        customCalendarView.setDateSelected(cmin);
     }
 }

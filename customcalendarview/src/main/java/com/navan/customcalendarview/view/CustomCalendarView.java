@@ -287,13 +287,9 @@ public class CustomCalendarView extends LinearLayout {
 
         for (TextView tv : vh.textViews) {
             if (!tv.getText().toString().isEmpty()) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentCalendar.getTime());
-                calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
-
 
                 if (minDate != null)
-                    if (calendar.before(minDate)) {
+                    if ((Integer.parseInt(tv.getText().toString()) < minDate.get(Calendar.DAY_OF_MONTH))) {
                         tv.setTextColor(getResources().getColor(R.color.cinzaClaro));
                         tv.setEnabled(false);
                     }
