@@ -286,7 +286,7 @@ public class CustomCalendarView extends LinearLayout {
             return;
 
         for (TextView tv : vh.textViews) {
-            if (!tv.getText().toString().isEmpty()) {
+            if (!tv.getText().toString().trim().isEmpty()) {
 
                 if (minDate != null && minDate.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH))
                     if ((Integer.parseInt(tv.getText().toString()) < minDate.get(Calendar.DAY_OF_MONTH))) {
@@ -304,7 +304,7 @@ public class CustomCalendarView extends LinearLayout {
             return;
 
         for (TextView tv : vh.textViews) {
-            if (!tv.getText().toString().isEmpty()) {
+            if (!tv.getText().toString().trim().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
@@ -330,7 +330,7 @@ public class CustomCalendarView extends LinearLayout {
 
         int i = 0;
         for (TextView tv : vh.textViews) {
-            if (!tv.getText().toString().isEmpty()) {
+            if (!tv.getText().toString().trim().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));
@@ -355,7 +355,7 @@ public class CustomCalendarView extends LinearLayout {
     private void showPreDateSelected() {
         int i = 0;
         for (TextView tv : vh.textViews) {
-            if (!tv.getText().toString().isEmpty()) {
+            if (!tv.getText().toString().trim().isEmpty()) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentCalendar.getTime());
                 calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tv.getText().toString()));

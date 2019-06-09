@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //cmin.setTime(new Date(System.currentTimeMillis()));
 
         Calendar cmax = Calendar.getInstance();
-        cmax.setTime(DateUtils.createDate("15/09/2019"));
+        cmax.setTime(DateUtils.createDate("15/09/2119"));
 
         customCalendarView.setMinDate(cmin);
         customCalendarView.setMaxDate(cmax);
